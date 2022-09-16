@@ -1,0 +1,27 @@
+version: '3.9'
+services:
+  mariadb12:
+    image: mariadb
+    volumes: 
+      - C:\dockerdata\mariadb:/var/lib/mysql
+    environment:
+      - MYSQL_DATABASE=mobileplan
+      - MYSQL_ROOT_PASSWORD=pas55word
+    ports:
+      - 3306:3306
+  mobileplanb:
+    build: C:\Users\Ashwin.Naik\Documents\workspace-spring-tool-suite-4-4.15.1.RELEASE\mobile-plan-unstoppables
+    restart: always
+    links: 
+      - mariadb12
+    ports:
+      - 8080:8080
+  auditplanb:
+    build: C:\Users\Ashwin.Naik\Documents\workspace-spring-tool-suite-4-4.15.1.RELEASE\audit-log-unstoppables
+    restart: always
+    links: 
+      - mariadb12
+    ports:
+      - 8081:8081
+    
+
